@@ -1,0 +1,17 @@
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/*
+!.vscode/extensions.json
+
+# Secretos / entorno
+.env
+.env.local
+*.key
+
+# Claude Code: configuración personal, no se comparte con el equipo
+.claude/settings.local.json
+CLAUDE.local.md
