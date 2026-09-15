@@ -30,7 +30,7 @@ El proyecto sigue Spec-Driven Development con Spec Kit, según la guía del curs
 
 ## Estado
 
-Documentos base listos. Siguiente paso: crear el repositorio en GitHub e instalar Spec Kit (fases 0 y 2 de [docs/sdd.md](docs/sdd.md#fase-0--repositorio)).
+Documentos base, repositorio y Spec Kit listos. Siguiente paso: la constitution ([fase 3 de docs/sdd.md](docs/sdd.md#fase-3--constitution)), con Claude Code abierto en la carpeta del repositorio.
 
 ## Cómo ejecutar
 

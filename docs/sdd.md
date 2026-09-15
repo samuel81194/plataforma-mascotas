@@ -14,9 +14,9 @@ Este documento sigue las fases de la guía, en el mismo orden, con cada *"inform
 
 | Fase | Qué | Estado |
 |---|---|---|
-| 0 | Repositorio en GitHub | ⬜ Pendiente: la carpeta todavía no es un repositorio git |
+| 0 | Repositorio en GitHub | ✅ `samuel81194/plataforma-mascotas` (privado). Falta invitar a Andrés |
 | 1 | Documentos base en `docs/` | ✅ Listos para revisar |
-| 2 | Instalar Spec Kit | ⬜ Pendiente: `uv` y `specify` aún no están instalados |
+| 2 | Instalar Spec Kit | ✅ Integración Claude, scripts PowerShell y extensión git |
 | 3 | Constitution | 📝 Texto listo |
 | 4 | Specify | 📝 Textos listos para las 4 features |
 | 5 | Plan | 📝 Texto listo |
@@ -24,7 +24,13 @@ Este documento sigue las fases de la guía, en el mismo orden, con cada *"inform
 
 ---
 
-## Fase 0 — Repositorio
+## Fase 0 — Repositorio ✅
+
+> **Hecho el 15 de septiembre de 2026:** repositorio privado [`samuel81194/plataforma-mascotas`](https://github.com/samuel81194/plataforma-mascotas), clonado en `C:\Users\samue\dev\plataforma-mascotas`, con la identidad de git configurada solo para ese repositorio.
+>
+> **Pendiente:** invitar a Andrés en GitHub (*Settings → Collaborators → Add people*). Él solo tiene que aceptar la invitación, clonar el repositorio fuera de OneDrive y abrirlo con Claude Code: no necesita instalar `uv` ni Spec Kit, porque `.specify/` y `.claude/` ya están en el repositorio.
+
+Los pasos, como referencia para cualquier computador nuevo:
 
 1. **Creen un repositorio privado en GitHub** y agréguense los dos como colaboradores. Nombre sugerido: `plataforma-mascotas`.
 2. **Clónenlo en VS Code:** `Ctrl+Shift+P → Git: Clone → pegar la URL del repo → elegir carpeta`.
@@ -63,9 +69,17 @@ git config --global user.email "tu-correo@unbosque.edu.co"
 
 ---
 
-## Fase 2 — Instalar Spec Kit
+## Fase 2 — Instalar Spec Kit ✅
 
-En la terminal de VS Code (PowerShell):
+> **Hecho el 15 de septiembre de 2026**, con tres diferencias frente a la guía, todas por cambios de la versión actual de Spec Kit (1.0.8.dev0):
+>
+> 1. **El `init` llevó tres opciones más:** `specify init --here --integration claude --script ps --force --non-interactive --ignore-agent-tools`.
+>    - `--ignore-agent-tools`: `specify check` busca el programa `claude` en la terminal; con la app de escritorio o la extensión de VS Code no lo encuentra, aunque Claude Code sí está disponible.
+>    - `--force` y `--non-interactive`: evitan preguntas que se quedan esperando respuesta cuando el comando no corre en una terminal interactiva.
+> 2. **Se instaló la extensión git** (`specify extension add git`). En esta versión, crear la rama `001-nombre` al correr `/speckit-specify` ya no viene en el núcleo de Spec Kit: sin la extensión se crea la carpeta `specs/001-.../`, pero no la rama que describe la guía. La extensión viene incluida en Spec Kit, tiene los commits automáticos desactivados (`.specify/extensions/git/git-config.yml`) y nunca hace push.
+> 3. **No hace falta PowerShell 7.** Los scripts de `.specify/scripts/powershell/` se probaron con el PowerShell 5.1 que trae Windows.
+
+Los pasos de la guía, como referencia. En la terminal de VS Code (PowerShell):
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -88,6 +102,8 @@ specify init --here --integration claude --script ps
 ## Fase 3 — Constitution
 
 Los principios que gobiernan todo lo que se construya después. Salen del brief y del sistema de diseño.
+
+**Antes de empezar:** abran Claude Code **en la carpeta del repositorio** (`C:\Users\samue\dev\plataforma-mascotas`). En VS Code: *File → Open Folder*; en la app de escritorio: una sesión nueva con esa carpeta. Los comandos `/speckit-*` solo aparecen en sesiones abiertas ahí.
 
 En el chat de Claude Code:
 
@@ -150,7 +166,7 @@ Resultado: `.specify/memory/constitution.md`.
 
 ## Fase 4 — Specify
 
-Una feature a la vez. Cada corrida crea una rama `00N-nombre` y una carpeta `specs/00N-nombre/` con su `spec.md`. **La Fase 0 tiene que estar hecha**: sin repositorio git no hay ramas.
+Una feature a la vez. Cada corrida crea una rama `00N-nombre` (la crea la extensión git instalada en la Fase 2) y una carpeta `specs/00N-nombre/` con su `spec.md`. Al terminar cada feature, integren su rama a `main` antes de empezar la siguiente.
 
 ### Mapa de features
 
